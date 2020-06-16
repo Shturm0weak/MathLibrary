@@ -1,4 +1,2 @@
-﻿  Matrix.cpp
-c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(67): warning C4715: 'Matrix::operator*': not all control paths return a value
-c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(84): warning C4715: 'Matrix::operator*': not all control paths return a value
+﻿  MathLibrary.cpp
   MathLibrary.vcxproj -> C:\Users\Alexandr\source\repos\MathLibrary\Debug\MathLibrary.exe

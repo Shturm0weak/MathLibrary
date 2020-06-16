@@ -15,12 +15,12 @@
 
  void Vector3D::PrintCoords()
 {
-	printf("Coords:\nX: %.3lf\nY: %.3lf\nZ: %.3lf\n",this->x,this->y,this->z);
+	printf("Coords:\nX: %.6lf\nY: %.6lf\nZ: %.6lf\n",this->x,this->y,this->z);
 }
 
  void Vector3D::PrintCoords(const Vector3D & vec3)
 {
-	printf("Coords:\nX: %.3lf\nY: %.3lf\nZ: %.3lf\n", vec3.x, vec3.y, vec3.z);
+	printf("Coords:\nX: %.6lf\nY: %.6lf\nZ: %.6lf\n", vec3.x, vec3.y, vec3.z);
 }
 
  Vector3D Vector3D::operator=(const Vector3D& vec3) {
@@ -40,9 +40,9 @@
 	return Vector3D(this->x - vec3.x, this->y - vec3.y, this->z - vec3.z);
 }
 
- Vector3D Vector3D::operator*(const Vector3D& vec3)
+ double Vector3D::operator*(const Vector3D& vec3)
 {
-	return Vector3D(this->x * vec3.x , this->y * vec3.y , this->z * vec3.z);
+	return (this->x * vec3.x + this->y * vec3.y + this->z * vec3.z);
 }
 
  Vector3D Vector3D::operator*(double value)
@@ -64,13 +64,6 @@
 	double y = this->x * vec3.z - vec3.x * this->z;
 	double z = this->x * vec3.y - vec3.x * this->y;
 }
-
- void Vector3D::operator*=(const Vector3D & vec3)
- {
-	 this->x *= vec3.x;
-	 this->y *= vec3.y;
-	 this->z *= vec3.z;
- }
 
  void Vector3D::operator*=(double value)
  {

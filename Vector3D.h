@@ -18,10 +18,9 @@ public:
 	void operator +=(const Vector3D& vec3);
 	void operator -=(const Vector3D& vec3);
 	void operator /=(const Vector3D& vec3);
-	void operator *=(const Vector3D& vec3);
 	void operator *=(double value);
 
-	Vector3D operator *(const Vector3D& vec3);
+	double operator *(const Vector3D& vec3);
 	Vector3D operator *(double value);
 	Vector3D operator +(const Vector3D& vec3);
 	Vector3D operator -(const Vector3D& vec3);
