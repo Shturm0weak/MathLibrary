@@ -1,67 +1,85 @@
-#include "Vector.h"
 #include <iostream>
+#include "Vector.h"
+#include "Matrix.h"
+#include "MathFunctions.h"
+
+using namespace math;
 
 Vector::Vector()
 {
-	m_array = new double[1];
-	m_array[0] = 0;
-	size = 0;
+#ifdef _DEBUG
+	std::cout << "Vector is created\n";
+#endif 
+	m_array = nullptr;
+	m_size = 0;
 }
 
-Vector::Vector(unsigned int size) : size(size)
+Vector::Vector(uint32_t size) : m_size(size)
 {
-	m_array = new double[this->size];
-	for (unsigned int i = 0; i < this->size; i++)
+#ifdef _DEBUG
+	std::cout << "Vector is created\n";
+#endif 
+	m_array = new double[m_size];
+	for (uint32_t i = 0; i < m_size; i++)
 	{
 		m_array[i] = 0;
 	}
 }
 
-Vector::Vector(unsigned int size, double value) : size(size)
+Vector::Vector(uint32_t size, double value) : m_size(size)
 {
-	m_array = new double[this->size];
-	for (unsigned int i = 0; i < this->size; i++)
+#ifdef _DEBUG
+	std::cout << "Vector is created\n";
+#endif 
+	m_array = new double[m_size];
+	for (uint32_t i = 0; i < m_size; i++)
 	{
 		m_array[i] = value;
 	}
 }
 
-Vector::Vector(unsigned int size, double * value) : size(size)
+Vector::Vector(uint32_t size, double * value) : m_size(size)
 {
-	m_array = new double[this->size];
-	for (unsigned int i = 0; i < this->size; i++)
+#ifdef _DEBUG
+	std::cout << "Vector is created\n";
+#endif 
+	m_array = new double[m_size];
+	for (uint32_t i = 0; i < m_size; i++)
 	{
 		m_array[i] = value[i];
 	}
 }
 
+Vector::Vector(const Vector& vec) : m_size(vec.m_size)
+{
+#ifdef _DEBUG
+	std::cout << "Vector is copied\n";
+#endif 
+	m_array = new double[m_size];
+	for (uint32_t i = 0; i < m_size; i++)
+	{
+		m_array[i] = vec.m_array[i];
+	}
+}
+
 Vector::~Vector()
 {
-	
+#ifdef _DEBUG
+	std::cout << "Vector is destroyed " << m_array << std::endl;
+#endif 
+	delete[] m_array;
+	m_array = nullptr;
 }
 
-void Vector::PrintCoords()
+Vector& Vector::operator=(const Vector & vec)
 {
-	for (unsigned int i = 0; i < size; i++)
-	{
-		printf_s("%.12lf\n",m_array[i]);
-	}
-}
-
-void Vector::PrintCoords(const Vector & vec)
-{
-	for (unsigned int i = 0; i < vec.size; i++)
-	{
-		printf_s("%.12lf\n", vec.m_array[i]);
-	}
-}
-
-Vector Vector::operator=(const Vector & vec)
-{
-	delete[] this->m_array;
-	this->m_array = new double[vec.size];
-	this->size = vec.size;
-	for (unsigned int i = 0; i < this->size; i++)
+#ifdef _DEBUG
+	std::cout << "Vector is copied\n";
+#endif 
+	delete[] m_array;
+	m_size = vec.m_size;
+	m_array = new double[m_size];
+	for (uint32_t i = 0; i < m_size; i++)
 	{
 		m_array[i] = vec.m_array[i];
 	}
@@ -71,125 +89,130 @@ Vector Vector::operator=(const Vector & vec)
 
 void Vector::operator+=(const Vector & vec)
 {
-	if (this->size != vec.size)
+	if (m_size != vec.m_size)
 		return;
-	for (unsigned int i = 0; i < this->size; i++)
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		this->m_array[i] += vec.m_array[i];
+		m_array[i] += vec.m_array[i];
 	}
 }
 
 void Vector::operator-=(const Vector & vec)
 {
-	if (this->size != vec.size)
+	if (m_size != vec.m_size)
 		return;
-	for (unsigned int i = 0; i < this->size; i++)
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		this->m_array[i] -= vec.m_array[i];
+		m_array[i] -= vec.m_array[i];
 	}
 }
 
 void Vector::operator*=(double value)
 {
-	for (unsigned int i = 0; i < this->size; i++)
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		this->m_array[i] *= value;
+		m_array[i] *= value;
 	}
 }
 
 double Vector::operator*(const Vector & vec)
 {
-	if (this->size != vec.size)
+	if (m_size != vec.m_size)
 		return NULL;
-	double r = 0;
-	for (unsigned int i = 0; i < this->size; i++)
+	double dotProduct = 0;
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		r += this->m_array[i] * vec.m_array[i];
+		dotProduct += m_array[i] * vec.m_array[i];
 	}
-	return r;
+	return dotProduct;
+}
+
+Vector Vector::operator*(Matrix & matrix)
+{
+	if (matrix.m == m_size) {
+		Vector c(matrix.m);
+		for (uint32_t i = 0; i < matrix.m; i++)
+		{
+			for (uint32_t j = 0; j < matrix.n; j++)
+			{
+				c.m_array[i] += matrix.operator()(i, j) * m_array[j];
+			}
+		}
+		return c;
+	}
 }
 
 Vector Vector::operator*(double value)
 {
-	Vector r(this->size);
-	for (unsigned int i = 0; i < this->size; i++)
+	Vector v(m_size);
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		r.m_array[i] = this->m_array[i] * value;
+		v.m_array[i] = m_array[i] * value;
 	}
-	return r;
+	return v;
 }
 
 Vector Vector::operator+(const Vector & vec)
 {
-	if (this->size != vec.size)
-		return NULL;
-	Vector r(this->size);
-	for (unsigned int i = 0; i < this->size; i++)
+	Vector v(m_size);
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		r.m_array[i] = this->m_array[i] + vec.m_array[i];
+		v.m_array[i] = m_array[i] + vec.m_array[i];
 	}
-	return r;
+	return v;
 }
 
 Vector Vector::operator-(const Vector & vec)
 {
-	if (this->size != vec.size)
-		return NULL;
-	Vector r(this->size);
-	for (unsigned int i = 0; i < this->size; i++)
+	Vector v(m_size);
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		r.m_array[i] = this->m_array[i] - vec.m_array[i];
+		v.m_array[i] = m_array[i] - vec.m_array[i];
 	}
-	return r;
-}
-
-Vector & Vector::Normilize()
-{
-	*this *= (1 / this->Length());
-	return *this;
+	return v;
 }
 
 double Vector::Length() const
 {
 	double length = 0;
-	for (unsigned int i = 0; i < size; i++)
+	for (uint32_t i = 0; i < m_size; i++)
 	{
-		length += this->m_array[i] * this->m_array[i];
+		length += m_array[i] * m_array[i];
 	}
-	return sqrtf(length);
+	return sqrtl(length);
 }
 
-double& Vector::operator[](unsigned int index)
+double& Vector::operator[](uint32_t index)
 {
-	return this->m_array[index];
+	return m_array[index];
 }
 
 bool Vector::operator>(const Vector & vec)
 {
-	return (this->Length() > vec.Length());
+	return (Length() > vec.Length());
 }
 
 bool Vector::operator<(const Vector & vec)
 {
-	return (this->Length() < vec.Length());
+	return (Length() < vec.Length());
 }
 
 bool Vector::operator>=(const Vector & vec)
 {
-	return (this->Length() >= vec.Length());
+	return (Length() >= vec.Length());
 }
 
 bool Vector::operator<=(const Vector & vec)
 {
-	return (this->Length() <= vec.Length());
+	return (Length() <= vec.Length());
 }
 
 bool Vector::operator==(const Vector & vec)
 {
-	return (this->Length() == vec.Length());
+	return (Length() == vec.Length());
 }
 
 bool Vector::operator!=(const Vector & vec)
 {
-	return (this->Length() != vec.Length());
+	return (Length() != vec.Length());
 }

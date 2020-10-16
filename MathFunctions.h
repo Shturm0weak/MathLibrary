@@ -1,21 +1,17 @@
-#pragma once
+#ifndef MATH_H_
+#define MATH_H_
+#include "MathLibrary.h"
 
-namespace functions {
-	template< typename T >
-	void sort(T arr[], unsigned int length);
+namespace math {
 
-	template< typename T >
-	void sort(T arr[], unsigned int length) {
-		for (unsigned int i = 0; i < length - 1; i++)
-		{
-			for (unsigned int j = 0; j < length - 1 - i; j++)
-			{
-				if (arr[j] > arr[j + 1]) {
-					T temp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = temp;
-				}
-			}
-		}
-	}
+	double Magnitude(Matrix& matrix);
+
+	void  Print(const Matrix& matrix);
+	void  Print(const Vector& vec);
+	void  Input(Matrix& matrix);
+
+	Matrix  Transpose(Matrix& matrix);
+	Vector  Normalize(Vector& vec);
 }
+
+#endif

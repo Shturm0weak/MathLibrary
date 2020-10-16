@@ -1,7 +1,106 @@
-﻿  MathLibrary.cpp
-  Generating code
-  1 of 127 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  MathLibrary.vcxproj -> C:\Users\Alexandr\source\repos\MathLibrary\Release\MathLibrary.exe
+﻿  Integrals.cpp
+c:\users\alexandr\source\repos\mathlibrary\integrals.cpp(5): warning C4273: 'integrals::RectangleMethod': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\integrals.h(4): note: see previous definition of 'RectangleMethod'
+c:\users\alexandr\source\repos\mathlibrary\integrals.cpp(17): warning C4273: 'integrals::TrapezoidMethod': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\integrals.h(6): note: see previous definition of 'TrapezoidMethod'
+c:\users\alexandr\source\repos\mathlibrary\integrals.cpp(32): warning C4273: 'integrals::ParabolaMethod': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\integrals.h(8): note: see previous definition of 'ParabolaMethod'
+  MathFunctions.cpp
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(12): warning C4251: 'math::Matrix::cv': class 'std::condition_variable' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(682): note: see declaration of 'std::condition_variable'
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(13): warning C4251: 'math::Matrix::cv_m': class 'std::mutex' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(82): note: see declaration of 'std::mutex'
+  MathLibrary.cpp
+  Matrix.cpp
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(12): warning C4251: 'math::Matrix::cv': class 'std::condition_variable' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(682): note: see declaration of 'std::condition_variable'
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(13): warning C4251: 'math::Matrix::cv_m': class 'std::mutex' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(82): note: see declaration of 'std::mutex'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(9): warning C4273: 'math::Matrix::Matrix': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(19): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(23): warning C4273: 'math::Matrix::Matrix': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(20): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(37): warning C4273: 'math::Matrix::Matrix': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(21): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(53): warning C4273: 'math::Matrix::~Matrix': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(22): note: see previous definition of '{dtor}'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(64): warning C4273: 'math::Matrix::operator ()': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(24): note: see previous definition of '()'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(69): warning C4273: 'math::Matrix::operator +=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(26): note: see previous definition of '+='
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(78): warning C4273: 'math::Matrix::operator -=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(27): note: see previous definition of '-='
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(87): warning C4273: 'math::Matrix::operator *=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(28): note: see previous definition of '*='
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(96): warning C4273: 'math::Matrix::operator =': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(29): note: see previous definition of '='
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(112): warning C4273: 'math::Matrix::FastMul': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(31): note: see previous definition of 'FastMul'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(135): warning C4273: 'math::Matrix::operator +': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(32): note: see previous definition of '+'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(146): warning C4273: 'math::Matrix::operator -': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(33): note: see previous definition of '-'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(157): warning C4273: 'math::Matrix::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(34): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(168): warning C4273: 'math::Matrix::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(36): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(231): warning C4273: 'math::Matrix::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(35): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(258): warning C4273: 'math::Matrix::AssignCol': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(39): note: see previous definition of 'AssignCol'
+c:\users\alexandr\source\repos\mathlibrary\matrix.cpp(269): warning C4273: 'math::Matrix::GetCol': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\matrix.h(40): note: see previous definition of 'GetCol'
+  Vector.cpp
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(12): warning C4251: 'math::Matrix::cv': class 'std::condition_variable' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(682): note: see declaration of 'std::condition_variable'
+c:\users\alexandr\source\repos\mathlibrary\matrix.h(13): warning C4251: 'math::Matrix::cv_m': class 'std::mutex' needs to have dll-interface to be used by clients of class 'math::Matrix'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\mutex(82): note: see declaration of 'std::mutex'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(9): warning C4273: 'math::Vector::Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(14): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(17): warning C4273: 'math::Vector::Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(15): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(29): warning C4273: 'math::Vector::Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(16): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(41): warning C4273: 'math::Vector::Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(17): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(53): warning C4273: 'math::Vector::Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(18): note: see previous definition of '{ctor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(66): warning C4273: 'math::Vector::~Vector': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(19): note: see previous definition of '{dtor}'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(75): warning C4273: 'math::Vector::operator =': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(21): note: see previous definition of '='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(91): warning C4273: 'math::Vector::operator +=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(22): note: see previous definition of '+='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(101): warning C4273: 'math::Vector::operator -=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(23): note: see previous definition of '-='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(111): warning C4273: 'math::Vector::operator *=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(24): note: see previous definition of '*='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(119): warning C4273: 'math::Vector::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(26): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(131): warning C4273: 'math::Vector::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(27): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(146): warning C4273: 'math::Vector::operator *': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(28): note: see previous definition of '*'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(156): warning C4273: 'math::Vector::operator +': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(29): note: see previous definition of '+'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(166): warning C4273: 'math::Vector::operator -': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(30): note: see previous definition of '-'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(176): warning C4273: 'math::Vector::Length': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(32): note: see previous definition of 'Length'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(186): warning C4273: 'math::Vector::operator []': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(34): note: see previous definition of '[]'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(191): warning C4273: 'math::Vector::operator >': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(36): note: see previous definition of '>'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(196): warning C4273: 'math::Vector::operator <': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(37): note: see previous definition of '<'
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(201): warning C4273: 'math::Vector::operator >=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(38): note: see previous definition of '>='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(206): warning C4273: 'math::Vector::operator <=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(39): note: see previous definition of '<='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(211): warning C4273: 'math::Vector::operator ==': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(40): note: see previous definition of '=='
+c:\users\alexandr\source\repos\mathlibrary\vector.cpp(216): warning C4273: 'math::Vector::operator !=': inconsistent dll linkage
+  c:\users\alexandr\source\repos\mathlibrary\vector.h(41): note: see previous definition of '!='
+     Creating library C:\Users\Alexandr\source\repos\MathLibrary\Release\MathLibrary.lib and object C:\Users\Alexandr\source\repos\MathLibrary\Release\MathLibrary.exp
+MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol _main
+C:\Users\Alexandr\source\repos\MathLibrary\Release\MathLibrary.exe : fatal error LNK1120: 1 unresolved externals
