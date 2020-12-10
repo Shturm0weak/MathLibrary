@@ -2,17 +2,16 @@
 #include "Matrix.h"
 #include "Vector.h"
 #include "MathFunctions.h"
-#include "Timer.h"
 
 using namespace math;
 
-Matrix::Matrix(uint32_t m, uint32_t n) : n(n),m(m)
+Matrix::Matrix(uint32_t rows, uint32_t cols) : m_Cols(cols),m_Rows(rows)
 {
 #ifdef _DEBUG
 	std::cout << "Matrix is created\n";
 #endif 
 
-	uint32_t size = m * n;
+	uint32_t size = rows * cols;
 	m_matrix = new double[size];
 	for (uint32_t i = 0; i < size; i++)
 	{
@@ -20,13 +19,13 @@ Matrix::Matrix(uint32_t m, uint32_t n) : n(n),m(m)
 	}
 }
 
-Matrix::Matrix(uint32_t m, uint32_t n,double matrix[]) : n(n),m(m)
+Matrix::Matrix(uint32_t rows, uint32_t cols, double matrix[]) : m_Cols(cols),m_Rows(rows)
 {
 #ifdef _DEBUG
 	std::cout << "Matrix is created\n";
 #endif 
 
-	uint32_t size = m * n;
+	uint32_t size = rows * cols;
 	m_matrix = new double[size];
 	for (uint32_t i = 0; i < size; i++)
 	{
@@ -34,15 +33,15 @@ Matrix::Matrix(uint32_t m, uint32_t n,double matrix[]) : n(n),m(m)
 	}
 }
 
-Matrix::Matrix(const Matrix & matrix) : n(matrix.n),m(matrix.m)
+Matrix::Matrix(const Matrix & matrix) : m_Cols(matrix.m_Cols),m_Rows(matrix.m_Rows)
 {
 #ifdef _DEBUG
 	std::cout << "Matrix is copied\n";
 #endif 
 
-	m_matrix = new double[m * n];
+	m_matrix = new double[m_Rows * m_Cols];
 
-	uint32_t size = m * n;
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		m_matrix[i] = matrix.m_matrix[i];
@@ -56,73 +55,90 @@ Matrix::~Matrix()
 #endif
 	delete[] m_matrix;
 	m_matrix = nullptr;
-	delete[] complete;
-	complete = nullptr;
 }
 
 double& Matrix::operator()(uint32_t i, uint32_t j)
 {
-	return m_matrix[i * m + j];
+	return m_matrix[i * m_Cols + j];
 }
 
-void Matrix::operator+=(Matrix & matrix)
+void Matrix::operator+=(const Matrix & matrix)
 {
-	uint32_t size = m * n;
-	for (uint32_t i = 0; i < size; i++)
-	{
-		m_matrix[i] += matrix.m_matrix[i];
+	if (m_Rows == matrix.m_Rows && m_Cols == matrix.m_Cols) {
+		uint32_t size = m_Rows * m_Cols;
+		for (uint32_t i = 0; i < size; i++)
+		{
+			m_matrix[i] += matrix.m_matrix[i];
+		}
 	}
 }
 
-void Matrix::operator-=(Matrix & matrix)
+void Matrix::operator-=(const Matrix & matrix)
 {
-	uint32_t size = m * n;
-	for (uint32_t i = 0; i < size; i++)
-	{
-		m_matrix[i] -= matrix.m_matrix[i];
+	if (m_Rows == matrix.m_Rows && m_Cols == matrix.m_Cols) {
+		uint32_t size = m_Rows * m_Cols;
+		for (uint32_t i = 0; i < size; i++)
+		{
+			m_matrix[i] -= matrix.m_matrix[i];
+		}
 	}
 }
 
 void Matrix::operator*=(double value)
 {
-	uint32_t size = m * n;
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		m_matrix[i] *= value;
 	}
 }
 
-void Matrix::operator=(Matrix& matrix)
+void Matrix::operator=(const Matrix& matrix)
 {
 #ifdef _DEBUG
 	std::cout << "Matrix is copied\n";
 #endif 
-	m = matrix.m;
-	n = matrix.n;
-	m_matrix = new double[m * n];
+	m_Rows = matrix.m_Rows;
+	m_Cols = matrix.m_Cols;
+	m_matrix = new double[m_Rows * m_Cols];
 
-	uint32_t size = m * n;
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		m_matrix[i] = matrix.m_matrix[i];
 	}
 }
 
-Matrix math::Matrix::FastMul(Matrix & matrix)
+void math::Matrix::Copy(Matrix * matrix)
 {
-	Timer timer;
-	if (m == matrix.n) {
-		Matrix C(m, matrix.n);
-		for (uint32_t i = 0; i < m; ++i)
+#ifdef _DEBUG
+	std::cout << "Matrix is copied\n";
+#endif 
+	m_Rows = matrix->m_Rows;
+	m_Cols = matrix->m_Cols;
+	m_matrix = new double[m_Rows * m_Cols];
+
+	uint32_t size = m_Rows * m_Cols;
+	for (uint32_t i = 0; i < size; i++)
+	{
+		m_matrix[i] = matrix->m_matrix[i];
+	}
+}
+
+Matrix math::Matrix::FastMul(const Matrix & matrix)
+{
+	if (m_Rows == matrix.m_Cols) {
+		Matrix C(m_Rows, matrix.m_Cols);
+		for (uint32_t i = 0; i < m_Rows; ++i)
 		{
-			double * c = C.m_matrix + i * n;
-			for (uint32_t j = 0; j < n; ++j)
+			double* c = C.m_matrix + i * m_Cols;
+			for (uint32_t j = 0; j < m_Cols; ++j)
 				c[j] = 0;
-			for (uint32_t k = 0; k < m; ++k)
+			for (uint32_t k = 0; k < m_Rows; ++k)
 			{
-				const double * b = matrix.m_matrix + k * n;
-				double a = m_matrix[i*m + k];
-				for (uint32_t j = 0; j < n; ++j)
+				const double * b = matrix.m_matrix + k * m_Cols;
+				double a = m_matrix[i*m_Rows + k];
+				for (uint32_t j = 0; j < m_Cols; ++j)
 					c[j] += a * b[j];
 			}
 		}
@@ -131,10 +147,10 @@ Matrix math::Matrix::FastMul(Matrix & matrix)
 	return Matrix(1, 1);
 }
 
-Matrix Matrix::operator+(Matrix & matrix)
+Matrix Matrix::operator+(const Matrix & matrix)
 {
-	Matrix c(m, n);
-	uint32_t size = m * n;
+	Matrix c(m_Rows, m_Cols);
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		c.m_matrix[i] = m_matrix[i] + matrix.m_matrix[i];
@@ -142,10 +158,10 @@ Matrix Matrix::operator+(Matrix & matrix)
 	return c;
 }
 
-Matrix Matrix::operator-(Matrix & matrix)
+Matrix Matrix::operator-(const Matrix & matrix)
 {
-	Matrix c(m, n);
-	uint32_t size = m * n;
+	Matrix c(m_Rows, m_Cols);
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		c.m_matrix[i] = m_matrix[i] - matrix.m_matrix[i];
@@ -155,8 +171,8 @@ Matrix Matrix::operator-(Matrix & matrix)
 
 Matrix Matrix::operator*(double value)
 {
-	Matrix c(m, n);
-	uint32_t size = m * n;
+	Matrix c(m_Rows, m_Cols);
+	uint32_t size = m_Rows * m_Cols;
 	for (uint32_t i = 0; i < size; i++)
 	{
 		c.m_matrix[i] = m_matrix[i] * value;
@@ -164,13 +180,13 @@ Matrix Matrix::operator*(double value)
 	return c;
 }
 
-Vector Matrix::operator*(Vector& value)
+Vector Matrix::operator*(const Vector& value)
 {
-	if (m == value.m_size) {
-		Vector c(m);
-		for (uint32_t i = 0; i < m; i++)
+	if (m_Rows == value.m_size) {
+		Vector c(m_Rows);
+		for (uint32_t i = 0; i < m_Rows; i++)
 		{
-			for (uint32_t j = 0; j < n; j++)
+			for (uint32_t j = 0; j < m_Cols; j++)
 			{
 				c.m_array[i] += operator()(i, j) * value.m_array[j];
 			}
@@ -227,49 +243,38 @@ Vector Matrix::operator*(Vector& value)
 //	}
 //}
 
-Matrix Matrix::operator*(Matrix& matrix)
+Matrix Matrix::operator*(const Matrix& matrix)
 {
-	Timer timer;
-	if (m == matrix.n) {
-		Matrix C(m, matrix.n);
-		for (uint32_t i = 0; i < m; ++i) {
-			uint32_t im = i * m;
-			double* a = m_matrix + im;
-			for (uint32_t j = 0; j < n; ++j) {
-				double* c = C.m_matrix + im + j;
-				double* b = matrix.m_matrix + j;
-				*c = 0;
-				for (uint32_t k = 0; k < m; ++k) {
-					*c += a[k] * *(b + (k * m));
-				}
-			}
+	Matrix C(m_Rows, matrix.m_Cols);
+	int K = m_Cols > matrix.m_Rows ? m_Cols : matrix.m_Rows;
+	for (int i = 0; i < m_Rows; ++i)
+	{
+		for (int j = 0; j < C.m_Cols; ++j)
+		{
+			C.m_matrix[i*C.m_Cols + j] = 0;
+			for (int k = 0; k < K; ++k)
+				C.m_matrix[i*C.m_Cols + j] += m_matrix[i*K + k] * matrix.m_matrix[k*C.m_Cols + j];
 		}
-		return C;
 	}
-	return Matrix(1,1);
+	return C;
 }
 
-//Matrix & Matrix::Inverse(Matrix & matrix)
-//{
-//	
-//}
-
-void Matrix::AssignCol(Vector vec, int col)
+void Matrix::AssignCol(const Vector& vec, int col)
 {
-	if (vec.m_size != m) {
+	if (vec.m_size != m_Rows) {
 		return;
 	}
-	for (uint32_t i = 0; i < m; i++)
+	for (uint32_t i = 0; i < m_Rows; i++)
 	{
-		operator()(i,col) = vec[i];
+		operator()(i, col) = vec.m_array[i];
 	}
 }
 
 Vector Matrix::GetCol(uint32_t col)
 {
-	if (col < n) {
-		Vector temp(m);
-		for (uint32_t i = 0; i < m; i++)
+	if (col < m_Cols) {
+		Vector temp(m_Rows);
+		for (uint32_t i = 0; i < m_Rows; i++)
 		{
 			temp[i] = operator()(i, col);
 		}

@@ -1,17 +1,16 @@
-#ifndef MATH_H_
-#define MATH_H_
+#pragma once
 #include "MathLibrary.h"
 
 namespace math {
 
-	double Magnitude(Matrix& matrix);
-
-	void  Print(const Matrix& matrix);
-	void  Print(const Vector& vec);
-	void  Input(Matrix& matrix);
-
-	Matrix  Transpose(Matrix& matrix);
-	Vector  Normalize(Vector& vec);
+	MATH_API double Magnitude(Matrix& matrix); 
+	MATH_API void Print(const Matrix& matrix);
+	MATH_API void Print(const Vector& vec);
+	MATH_API void Input(Matrix& matrix); 
+	MATH_API Matrix Transpose(const Matrix& matrix);
+	MATH_API Matrix Cofactor(const Matrix& matrix, int p, int q);
+	MATH_API int Determinant(const Matrix& matrix,int n);
+	MATH_API Matrix Adjoint(const Matrix& matrix);
+	MATH_API Matrix Inverse(const Matrix& matrix);
+	MATH_API Vector Normalize(const Vector& vec);
 }
-
-#endif

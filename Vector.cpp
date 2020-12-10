@@ -129,11 +129,11 @@ double Vector::operator*(const Vector & vec)
 
 Vector Vector::operator*(Matrix & matrix)
 {
-	if (matrix.m == m_size) {
-		Vector c(matrix.m);
-		for (uint32_t i = 0; i < matrix.m; i++)
+	if (matrix.m_Rows == m_size) {
+		Vector c(matrix.m_Rows);
+		for (uint32_t i = 0; i < matrix.m_Rows; i++)
 		{
-			for (uint32_t j = 0; j < matrix.n; j++)
+			for (uint32_t j = 0; j < matrix.m_Cols; j++)
 			{
 				c.m_array[i] += matrix.operator()(i, j) * m_array[j];
 			}
