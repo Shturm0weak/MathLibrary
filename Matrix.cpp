@@ -25,6 +25,7 @@ Matrix::Matrix(size_t rows, size_t cols, double matrix[]) : m_Cols(cols), m_Rows
 	//	std::cout << "Matrix is created\n";
 	//#endif 
 
+	delete[] m_Matrix;
 	size_t size = rows * cols;
 	m_Matrix = new double[size];
 	memcpy(m_Matrix, matrix, size * 8);
