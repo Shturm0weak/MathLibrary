@@ -39,8 +39,21 @@ Matrix::Matrix(const Matrix& matrix) : m_Cols(matrix.m_Cols), m_Rows(matrix.m_Ro
 
 	if (&matrix == this) return;
 	size_t size = m_Rows * m_Cols;
+	delete[] m_Matrix;
 	m_Matrix = new double[m_Rows * m_Cols];
 	memcpy(m_Matrix, matrix.m_Matrix, size * 8);
+}
+
+math::Matrix::Matrix(Matrix&& matrix) noexcept
+{
+	if (&matrix == this) return;
+	m_Rows = matrix.m_Rows;
+	m_Cols = matrix.m_Cols;
+	delete[] m_Matrix;
+	m_Matrix = matrix.m_Matrix;
+	matrix.m_Matrix = nullptr;
+	matrix.m_Rows = 0;
+	matrix.m_Cols = 0;
 }
 
 Matrix::~Matrix()
@@ -218,8 +231,7 @@ void Matrix::AssignRow(const Vector& vector, size_t row)
 void Matrix::AppendCol(const Vector& vector)
 {
 	if (vector.m_Size != m_Rows) throw std::string("Matrix and Vector have to have equal amount of rows and columns!");
-	Matrix tempMat(0, 0);
-	tempMat = std::move(*this);
+	Matrix tempMat = std::move(*this);
 	m_Rows = tempMat.m_Rows;
 	m_Cols = tempMat.m_Cols;
 	m_Matrix = new double[m_Rows * (m_Cols + 1)];
@@ -240,8 +252,7 @@ void Matrix::AppendCol(const Vector& vector)
 void math::Matrix::AppendRow(const Vector& vector)
 {
 	if (vector.m_Size != m_Cols) throw std::string("Matrix and Vector have to have equal amount of rows and columns!");
-	Matrix tempMat(0, 0);
-	tempMat = std::move(*this);
+	Matrix tempMat = std::move(*this);
 	m_Rows = tempMat.m_Rows;
 	m_Cols = tempMat.m_Cols;
 	m_Matrix = new double[(m_Rows + 1) * m_Cols];
@@ -262,8 +273,7 @@ void math::Matrix::AppendRow(const Vector& vector)
 void Matrix::RemoveCol(size_t col)
 {
 	if (col > m_Cols - 1) throw std::string("Column index is out of range!");
-	Matrix tempMat(0, 0);
-	tempMat = std::move(*this);
+	Matrix tempMat = std::move(*this);
 	m_Rows = tempMat.m_Rows;
 	m_Cols = tempMat.m_Cols;
 	m_Matrix = new double[m_Rows * (m_Cols - 1)];
@@ -287,8 +297,7 @@ void Matrix::RemoveCol(size_t col)
 void Matrix::RemoveRow(size_t row)
 {
 	if (row > m_Rows - 1)  throw std::string("Row index is out of range!");
-	Matrix tempMat(0, 0);
-	tempMat = std::move(*this);
+	Matrix tempMat = std::move(*this);
 	m_Rows = tempMat.m_Rows;
 	m_Cols = tempMat.m_Cols;
 	m_Matrix = new double[(m_Rows - 1) * m_Cols];

@@ -38,6 +38,16 @@ Vector::Vector(const Vector& vector) : m_Size(vector.m_Size)
 	memcpy(m_Array, vector.m_Array, m_Size * 8);
 }
 
+math::Vector::Vector(Vector&& vector) noexcept
+{
+	if (&vector == this) return;
+	m_Size = vector.m_Size;
+	delete[] m_Array;
+	m_Array = vector.m_Array;
+	vector.m_Array = nullptr;
+	vector.m_Size = 0;
+}
+
 Vector::~Vector()
 {
 	//#ifdef _DEBUG
@@ -184,8 +194,7 @@ void math::Vector::Clear()
 
 void math::Vector::Erase(size_t index)
 {
-	Vector temp;
-	temp = std::move(*this);
+	Vector temp = std::move(*this);
 	m_Size = temp.m_Size;
 	m_Array = new double[m_Size - 1];
 	for (size_t i = 0; i < index; i++)
@@ -201,8 +210,7 @@ void math::Vector::Erase(size_t index)
 
 void math::Vector::Join(Vector& vector, size_t index)
 {
-	Vector temp;
-	temp = std::move(*this);
+	Vector temp = std::move(*this);
 	m_Size = temp.m_Size;
 	m_Array = new double[m_Size + vector.m_Size];
 	for (size_t i = index; i < index + vector.m_Size; i++)

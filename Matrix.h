@@ -16,6 +16,7 @@ namespace math {
 		Matrix(size_t rows, size_t cols, double initValue = 0.0);
 		Matrix(size_t rows, size_t cols, double matrix[]);
 		Matrix(const Matrix& matrix);
+		Matrix(Matrix&& matrix) noexcept;
 		void Copy(const Matrix& matrix);
 		~Matrix();
 

@@ -17,6 +17,7 @@ namespace math {
 		Vector(size_t size = 0, double value = 0.0);
 		Vector(size_t size, double* value);
 		Vector(const Vector& vector);
+		Vector(Vector&& vector) noexcept;
 		~Vector();
 
 		void operator=(const Vector& vector);
